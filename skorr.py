@@ -225,6 +225,17 @@ def test_message(message):
     except Exception as e:
         print(str(e))
 
+    returndata = message['data']
+
+    if isBye:
+        returndata += 'b'
+    elif isNoBall:
+        returndata += 'nb'
+    elif isWideBall:
+        returndata += 'wd'
+    elif isLegBye:
+        returndata += 'lb'
+
     response['data'] = message['data']
     response['count'] = session['receive_count']
     response['mtotal'] = session['mtotal']
@@ -249,9 +260,7 @@ def test_broadcast_message(message):
 @socketio.on('join', namespace='/test')
 def join(message):
     join_room(message['room'])
-    emit('my response',
-         {'data': 'In rooms: ' + ', '.join(str(request.namespace.rooms))
-        })
+    emit('my response', {'data': ''})
 
 
 def init_player_one(name):
