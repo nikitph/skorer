@@ -1,1 +1,1 @@
-web: gunicorn skorr:app --log-file -
+web: gunicorn --worker-class socketio.sgunicorn.GeventSocketIOWorker skorr:app --log-file -
