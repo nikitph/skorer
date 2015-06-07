@@ -66,7 +66,7 @@ def opening_get():
 
 @app.route('/opening', methods=['POST'])
 def opening_post():
-    if request.form['batting'] == 1:
+    if request.form['batting'] == '1':
         rurl = '/pitch/team1'
     else:
         rurl = '/pitch/team2'
