@@ -236,7 +236,7 @@ def test_message(message):
     elif isLegBye:
         returndata += 'lb'
 
-    response['data'] = message['data']
+    response['data'] = returndata
     response['count'] = session['receive_count']
     response['mtotal'] = session['mtotal']
     response['wickets'] = session['currentwickets']
