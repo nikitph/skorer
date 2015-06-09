@@ -120,7 +120,13 @@ def comm_get(mid):
 
 @app.route('/scorecard/<mid>', methods=['GET'])
 def sc_get(mid):
-    return render_template('scorecard.html', mtch=str(mid))
+    scorecard_dict = []
+    global match
+    mtch = match[mid]
+    for p in mtch.get_all_players(session['playing']):
+        temp = mtch.get_player(p, session['playing'])
+        scorecard_dict.append(temp.return_runs())
+    return render_template('scorecard.html', sc=json.dumps(scorecard_dict), mtch=str(mid))
 
 
 @app.route('/')
