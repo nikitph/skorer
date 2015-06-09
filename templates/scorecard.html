@@ -17,6 +17,11 @@
             socket.on('connect', function () {
                 var mid = {{ mtch }};
                 socket.emit('join', {room: mid });
+                var sourc = {{ sc|safe }};
+                Materialize.toast(msg.count + ': ' + msg.data, 1000);
+                var tbl = $('#commentary');
+                var jsonHtmlTable = ConvertJsonToTable(sourc, 'jsonTable', null, 'Download');
+                tbl.html(jsonHtmlTable);
             });
 
             // event handler for server sent data
@@ -24,7 +29,6 @@
             socket.on('my response', function (msg) {
                 var a = '';
                 var sourc = msg.scorecard;
-                var options = {source: sourc};
                 Materialize.toast(msg.count + ': ' + msg.data, 1000);
                 var tbl = $('#commentary');
                 var jsonHtmlTable = ConvertJsonToTable(sourc, 'jsonTable', null, 'Download');

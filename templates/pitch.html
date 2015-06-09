@@ -9,12 +9,12 @@
 
             }
 
-            var keeper = {{ arr2|safe }};
+           {# var keeper = {{ arr2|safe }};
             for (var i = 0; i < keeper.length; i++) {
                 $('#keeper').append('<option value=1>' + keeper[i] + '</option>');
                 $('#bowler').append('<option value=1>' + keeper[i] + '</option>');
 
-            }
+            }#}
 
 
             $('select').material_select();
@@ -51,13 +51,13 @@
                                     <option value="" disabled selected>Who's on the bowler's end?</option>
                                 </select>
 
-                                 <select id="keeper" name="keeper">
+                                 {#<select id="keeper" name="keeper">
                                     <option value="" disabled selected>Who's the wicket keeper?</option>
                                 </select>
 
                                  <select id="bowler" name="bowler">
                                     <option value="" disabled selected>Who's Bowling?</option>
-                                </select>
+                                </select>#}
                             </div>
 
                             <div class="center">
