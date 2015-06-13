@@ -4,6 +4,80 @@
     <script type="text/javascript"
             src="http://cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
     <script type="text/javascript" charset="utf-8">
+        var invalid = false;
+        var noball = false;
+        var wide = false;
+        var bye =false;
+        var legbye=false;
+        var wicket=false;
+        var strikerout = false;
+        var noballextra = false;
+
+        function setinvalid(val) {
+            invalid = val.checked;
+        }
+
+        function setnoball(val) {
+            noball = val.checked;
+        }
+
+         function setnoballextra(val) {
+            noballextra = val.checked;
+        }
+
+        function setwide(val) {
+            wide = val.checked;
+        }
+
+        function setbye(val) {
+            bye = val.checked;
+        }
+
+        function setlegbye(val) {
+            legbye = val.checked;
+        }
+
+        function setwicket(val) {
+            wicket = val.checked;
+        }
+
+        function setstrikerout(val) {
+            strikerout = val.checked;
+        }
+
+        function getinvalid() {
+
+            return invalid;
+        }
+
+        function getnoball() {
+            return noball;
+        }
+
+         function getnoballextra() {
+            return noballextra;
+        }
+
+        function getwide() {
+            return wide;
+        }
+
+        function getbye() {
+            return bye;
+        }
+
+        function getlegbye() {
+            return legbye;
+        }
+
+        function getwicket() {
+            return wicket;
+        }
+
+        function getstrikerout() {
+            return strikerout;
+        }
+
         $(document).ready(function () {
             $('select').material_select();
             $('.modal-trigger').leanModal();
@@ -18,12 +92,14 @@
                 socket.emit('join', {room: mat});
                 socket.emit('my event', {
                     data: '',
-                    invalid: false,
-                    noball: false,
-                    wide: false,
-                    bye: false,
-                    legbye: false,
-                    wicket: false
+                    invalid: getinvalid(),
+                    noball: getnoball(),
+                    wide: getwide(),
+                    bye: getbye(),
+                    legbye: getlegbye(),
+                    wicket: getwicket(),
+                    strikerout: getstrikerout(),
+                    noballextra: getnoballextra()
                 });
 
             });
@@ -57,12 +133,13 @@
             $('form#emit').submit(function (event) {
                 socket.emit('my event', {
                     data: $('#emit_data').val(),
-                    invalid: false,
-                    noball: false,
-                    wide: false,
-                    bye: false,
-                    legbye: false,
-                    wicket: false
+                    invalid: getinvalid(),
+                    noball: getnoball(),
+                    wide: getwide(),
+                    bye: getbye(),
+                    legbye: getlegbye(),
+                    wicket: getwicket(),
+                    strikerout: getstrikerout()
                 });
                 return false;
             });
@@ -101,12 +178,13 @@
 
             socket.emit('my event', {
                 data: i,
-                invalid: false,
-                noball: false,
-                wide: false,
-                bye: false,
-                legbye: false,
-                wicket: false
+                invalid: getinvalid(),
+                noball: getnoball(),
+                wide: getwide(),
+                bye: getbye(),
+                legbye: getlegbye(),
+                wicket: getwicket(),
+                strikerout: getstrikerout()
             });
             return false;
         }
@@ -120,12 +198,13 @@
 
             socket.emit('my event', {
                 data: sel.value,
-                invalid: false,
-                noball: false,
-                wide: false,
-                bye: true,
-                legbye: false,
-                wicket: false
+                invalid: getinvalid(),
+                noball: getnoball(),
+                wide: getwide(),
+                bye: getbye(),
+                legbye: getlegbye(),
+                wicket: getwicket(),
+                strikerout: getstrikerout()
             });
             initSelec(sel);
             return false;
@@ -309,94 +388,82 @@
 
         </div>
         <div class="row">
-             <div class="col s12 m2">
+            <div class="col s12 m2">
                 <div class="icon-block center">
                     <br>
                 </div>
             </div>
-            <div class="col s12 m1">
-                <div class="icon-block center">
-
-                    <select id="wide" onchange="submitFuncSelWideBall(this)">
-                        <option value="" disabled selected>Wide</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-
-                    </select>
-
+            <div class="col s3 m1">
+                <div class="switch center">
+                    <label>
+                        Wide
+                        <input type="checkbox" onchange="setwide(this)">
+                        <span class="lever center"></span>
+                        no.......Yes
+                    </label>
                 </div>
             </div>
 
-            <div class="col s12 m2">
-                <div class="icon-block center">
-
-                    <select id="noball" onchange="submitFuncSelNoBall(this)">
-                        <option value="" disabled selected>No Ball</option>
-                        <option value="1 nb">Nb</option>
-                        <option value="2 nb">1+Nb</option>
-                        <option value="3 nb">2+Nb</option>
-                        <option value="4 nb">3+Nb</option>
-                        <option value="5 nb">4+Nb</option>
-                        <option value="7 nb">6+Nb</option>
-                        <option value="2 nbe">1+Nb(Extra)</option>
-                        <option value="3 nbe">2+Nb(Extra)</option>
-                        <option value="4 nbe">3+Nb(Extra)</option>
-                        <option value="5 nbe">4+Nb(Extra)</option>
-
-                    </select>
-
+            <div class="col s3 m1">
+                <div class="switch">
+                    <label>
+                        No ball
+                        <input type="checkbox" name="nb" onchange="setnoball(this)">
+                        <span class="lever"></span>
+                    </label>
                 </div>
             </div>
 
-            <div class="col s12 m1">
-                <div class="icon-block center">
-
-                    <select id="bye" onchange="submitFuncSelBye(this)">
-                        <option value="" disabled selected>Bye</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-
-                    </select>
-
+            <div class="col s3 m1">
+                <div class="switch">
+                    <label>
+                        Noball(Ext)
+                        <input type="checkbox" onchange="setnoball(this)">
+                        <span class="lever"></span>
+                    </label>
                 </div>
             </div>
 
-            <div class="col s12 m1">
-                <div class="icon-block center">
+            <div class="col s3 m1">
+                <div class="switch">
+                    <label>
+                        Bye <input type="checkbox" onchange="setbye(this)">
+                        <span class="lever"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="col s3 m1">
+                <div class="switch">
+                    <label>
+                        Leg bye <input type="checkbox" onchange="setlegbye(this)">
+                        <span class="lever"></span>
 
-                    <select id="legbye" onchange="submitFuncSelLegBye(this)">
-                        <option value="" disabled selected>Leg Bye</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
+                    </label>
+                </div>
+            </div>
+            <div class="col s3 m1">
+                <div class="switch">
+                    <label>
+                        Wicket(S) <input type="checkbox" onchange="setwicket(this)">
+                        <span class="lever"></span>
 
-                    </select>
+                    </label>
+                </div>
+            </div>
+            <div class="col s3 m1">
+                <div class="switch">
+                    <label>
+                        Wicket(NS) <input type="checkbox" onchange="setstrikerout(this)">
+                        <span class="lever"></span>
 
+                    </label>
                 </div>
             </div>
 
-            <div class="col s12 m3">
-                <div class="icon-block center">
-                    <select id="wicket" onchange="submitFuncSelWicket(this)">
-                        <option value="" disabled selected>Wicket</option>
-                        <option value="0 s">Striker out</option>
-                        <option value="0 ns">Non Striker out</option>
-
-                    </select>
-                </div>
-
-
-            </div>
 
         </div>
     </div>
-    
+
     <footer class="page-footer orange lighten-2">
         <div class="container white-text">
             © Skorr

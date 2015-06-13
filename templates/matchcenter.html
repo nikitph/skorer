@@ -18,7 +18,6 @@
                 socket.emit('join', {room: '' });
             });
                 var sourc = {{ mtch|safe }};
-                var options = {source: sourc};
                 var tbl = $('#commentary');
                 var jsonHtmlTable = ConvertJsonToTable(sourc, 'jsonTable', null, 'Download');
                 tbl.html(jsonHtmlTable);

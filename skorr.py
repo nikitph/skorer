@@ -122,7 +122,7 @@ def comm_get(mid):
 def sc_get(mid):
     scorecard_dict = []
     global match
-    mtch = match[mid]
+    mtch = match[session['mid']]
     for p in mtch.get_all_players(session['playing']):
         temp = mtch.get_player(p, session['playing'])
         scorecard_dict.append(temp.return_runs())
