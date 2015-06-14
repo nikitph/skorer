@@ -34,6 +34,12 @@
   animation-name: fadeInDown;
 }
 
+    #main
+    {
+        -webkit-animation-delay: 800ms;
+        -moz-animation-delay: 800ms;
+    }
+
 </style>
 {% endblock %}
 {% block script %}
@@ -47,7 +53,7 @@
 
 {% block content %}
 
-    <div class="container animated fadeIn">
+    <div class="container animated fadeIn" id="main">
         <form action="/teams" method="get">
             <div class="section">
 
