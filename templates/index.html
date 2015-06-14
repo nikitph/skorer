@@ -1,4 +1,49 @@
 {% extends "template.html" %}
+{% block style %}
+    <style>
+@-webkit-keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+.fadeInDown {
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+}
+
+</style>
+{% endblock %}
+{% block script %}
+<script>
+        $(document).ready(function () {
+
+            $('#banner').addClass('animated fadeInDown');
+        });
+</script>
+{% endblock %}
 
 {% block content %}
 
@@ -67,6 +112,14 @@
                                         international/first class/state level matches. Our focus is strictly local.</p>
                                     </div>
                                 </li>
+                                 <li>
+                                    <div class="collapsible-header green-text"><i class="mdi-action-speaker-notes"></i>Limitations:
+                                    </div>
+                                    <div class="collapsible-body grey-text"><p>This is version 0.1. Functionality is congruent to that. No bowler support. If you try to break the
+                                    software, it will break. We are giving you a knife. You can carve but also cut yourself.</p>
+                                    </div>
+                                </li>
+
                             </ul>
 
 
