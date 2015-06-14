@@ -3,7 +3,7 @@
 {% block script %}
     <script>
         $(document).ready(function () {
-            var max_fields = 10; //maximum input boxes allowed
+            var max_fields = 15; //maximum input boxes allowed
             var wrapper = $("#team1"); //Fields wrapper
             var wrappertwo = $("#team2");
             var add_button = $("#add_field_button"); //Add button ID
@@ -15,14 +15,14 @@
                 e.preventDefault();
                 if (x < max_fields) { //max input box allowed
                     x++; //text box increment
-                    $(wrapper).append('<div class="input-field"><i class="small mdi-action-account-circle orange-text prefix"></i> <input id="player" type="text" name="player1_'+x+'" placeholder="enter player name here"></div>'); //add input box
+                    $(wrapper).append('<div class="input-field animated fadeInRight"><i class="small mdi-action-account-circle orange-text prefix"></i> <input id="player" type="text" name="player1_'+x+'" placeholder="enter player name here"></div>'); //add input box
                 }
             });
             $(add_button_two).click(function (e) { //on add input button click
                 e.preventDefault();
                 if (y < max_fields) { //max input box allowed
                     y++; //text box increment
-                    $(wrappertwo).append('<div class="input-field"><i class="small mdi-action-account-circle orange-text prefix"></i> <input id="player2" type="text" name="player2_'+y+'" placeholder="enter player name here"></div>'); //add input box
+                    $(wrappertwo).append('<div class="input-field animated fadeInRight"><i class="small mdi-action-account-circle orange-text prefix"></i> <input id="player2" type="text" name="player2_'+y+'" placeholder="enter player name here"></div>'); //add input box
                 }
             });
             $(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
@@ -36,7 +36,7 @@
 
 {% block content %}
 
-    <div class="container">
+    <div class="container animated fadeIn">
         <form action="/teams" method="post">
             <div class="section">
 
