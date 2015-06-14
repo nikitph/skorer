@@ -14,19 +14,22 @@
         var noballextra = false;
 
         function setinvalid(val) {
-            invalid = val.checked;
+            invalid = val;
         }
 
         function setnoball(val) {
             noball = val.checked;
+            setinvalid(val.checked);
         }
 
          function setnoballextra(val) {
             noballextra = val.checked;
+             setinvalid(val.checked);
         }
 
         function setwide(val) {
             wide = val.checked;
+            setinvalid(val.checked);
         }
 
         function setbye(val) {

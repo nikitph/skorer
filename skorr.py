@@ -237,7 +237,7 @@ def test_message(message):
     except Exception as e:
         print(str(e))
 
-    returndata = message['data']
+    returndata = str(message['data'])
 
     if isBye:
         returndata += 'b'
@@ -249,7 +249,7 @@ def test_message(message):
         returndata += 'lb'
 
     response['data'] = returndata
-    response['count'] = session['receive_count']
+    response['count'] = 1
     response['mtotal'] = session['mtotal']
     response['wickets'] = session['currentwickets']
     response['overs'] = session['currentovers']
