@@ -27,9 +27,11 @@
             // the data is displayed in the "Received" section of the page
             socket.on('my response', function (msg) {
                 var sourc = msg.scorecard;
-                var tbl = $('#commentary');
-                var jsonHtmlTable = ConvertJsonToTable(sourc, 'jsonTable', null, 'Download');
-                tbl.html(jsonHtmlTable);
+                if( typeof sourc != 'undefined') {
+                    var tbl = $('#commentary');
+                    var jsonHtmlTable = ConvertJsonToTable(sourc, 'jsonTable', null, 'Download');
+                    tbl.html(jsonHtmlTable);
+                }
 
 
             });
@@ -62,12 +64,12 @@
                                                                         <th></th>
                                     <th></th>
 
-                                    <th>dots</th>
-                                    <th>ones</th>
-                                    <th>Twos</th>
-                                    <th>threes</th>
-                                    <th>fours</th>
-                                    <th>Sixes</th>
+                                    <th>0s</th>
+                                    <th>1s</th>
+                                    <th>2s</th>
+                                    <th>3s</th>
+                                    <th>4s</th>
+                                    <th>6s</th>
                                     <th>Total</th>
                                                                         <th>Balls</th>
 

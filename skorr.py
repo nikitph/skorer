@@ -170,7 +170,7 @@ def test_message(message):
     mtch = match[session['mid']]
     try:
         run = int(message['data'])
-        session['mtotal'] = session.get('mtotal', 0) + run
+        session['mtotal'] = session.get['mtotal'] + run
         striker = mtch.get_player(session['striker'], session['playing'])
         if isNoBall:
             if message['nbe']:
