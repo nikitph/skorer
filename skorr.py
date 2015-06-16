@@ -128,6 +128,21 @@ def sc_get(mid):
         scorecard_dict.append(temp.return_runs())
     return render_template('scorecard.html', sc=json.dumps(scorecard_dict), mtch=str(mid))
 
+@app.route('/fullscorecard/<mid>', methods=['GET'])
+def fullsc_get(mid):
+    scorecard_dict = []
+    global match
+    mtch = match[session['mid']]
+    scorecard_dict.append(['','','','','Team 1','','','',''])
+    for p in mtch.get_all_players(1):
+        temp = mtch.get_player(p, 1)
+        scorecard_dict.append(temp.return_runs())
+    scorecard_dict.append(['','','','','Team 2','','','',''])
+    for p in mtch.get_all_players(2):
+        temp = mtch.get_player(p, 2)
+        scorecard_dict.append(temp.return_runs())
+    return render_template('fullscorecard.html', sc=json.dumps(scorecard_dict), mtch=str(mid))
+
 
 @app.route('/')
 def index():
@@ -145,7 +160,12 @@ def matchc_get(mid):
     scorecard_dict = []
     global match
     mtch = match[session['mid']]
-    for p in mtch.get_all_players(session['playing']):
+    scorecard_dict.append(['','','','','Team 1','','','',''])
+    for p in mtch.get_all_players(1):
+        temp = mtch.get_player(p, session['playing'])
+        scorecard_dict.append(temp.return_runs())
+    scorecard_dict.append(['','','','','Team 2','','','',''])
+    for p in mtch.get_all_players(2):
         temp = mtch.get_player(p, session['playing'])
         scorecard_dict.append(temp.return_runs())
     return render_template('matchcenter.html', mtch=json.dumps(scorecard_dict))
@@ -170,7 +190,7 @@ def test_message(message):
     mtch = match[session['mid']]
     try:
         run = int(message['data'])
-        session['mtotal'] = session.get['mtotal'] + run
+        session['mtotal'] = session['mtotal'] + run
         striker = mtch.get_player(session['striker'], session['playing'])
         if isNoBall:
             if message['nbe']:
@@ -192,15 +212,15 @@ def test_message(message):
             session['currentwickets'] += 1
             if session['currentwickets'] == session['wickets']:
                 response['endofinnings'] = True
-                session['mtotalone'] = session['mtotal']
+                response['mtotalone'] = session['mtotal']
 
             if not response['endofinnings']:
-                if message['stikerout']:
-                    session['striker'] = mtch.get_next_player(session['currentwickets'] + 2, session['playing'])
+                if message['strikerout']:
+                    session['striker'] = mtch.get_next_player(session['currentwickets'] + 1, session['playing'])
                     session['playerone'] = session['striker']
 
                 else:
-                    session['nonstriker'] = mtch.get_next_player(session['currentwickets'] + 2, session['playing'])
+                    session['nonstriker'] = mtch.get_next_player(session['currentwickets'] + 1, session['playing'])
                     session['playertwo'] = session['nonstriker']
 
         else:
@@ -216,12 +236,7 @@ def test_message(message):
             scorecard_dict.append(temp.return_runs())
 
         response['scorecard'] = scorecard_dict
-        response['playerone'] = session['playerone']
-        player_1 = mtch.get_player(session['playerone'], session['playing'])
-        response['playeroneruns'] = player_1.total()
-        response['playertwo'] = session['playertwo']
-        player_2 = mtch.get_player(session['playertwo'], session['playing'])
-        response['playertworuns'] = player_2.total()
+
         response['endofover'] = False
 
         if session['validdeliveries'] == 6:
@@ -231,7 +246,7 @@ def test_message(message):
             session['currentovers'] += 1
             if session['currentovers'] == session['overs']:
                 response['endofinnings'] = True
-                session['mtotalone'] = session['mtotal']
+                response['mtotalone'] = session['mtotal']
 
 
     except Exception as e:
@@ -247,15 +262,22 @@ def test_message(message):
         returndata += 'wd'
     elif isLegBye:
         returndata += 'lb'
+    elif isWicket:
+        returndata += 'W'
 
     response['data'] = returndata
     response['count'] = 1
+    response['playerone'] = session['playerone']
+    player_1 = mtch.get_player(session['playerone'], session['playing'])
+    response['playeroneruns'] = player_1.total()
+    response['playertwo'] = session['playertwo']
+    player_2 = mtch.get_player(session['playertwo'], session['playing'])
+    response['playertworuns'] = player_2.total()
     response['mtotal'] = session['mtotal']
     response['wickets'] = session['currentwickets']
     response['overs'] = session['currentovers']
     response['deliveries'] = session['validdeliveries']
     response['playing'] = session['playing']
-    response['mtotalone'] = session['mtotalone']
     global replay
     replay[session['mid']] = response
     print replay[session['mid']]
