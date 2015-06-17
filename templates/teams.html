@@ -15,14 +15,14 @@
                 e.preventDefault();
                 if (x < max_fields) { //max input box allowed
                     x++; //text box increment
-                    $(wrapper).append('<div class="input-field animated fadeIn"><i class="small mdi-action-account-circle orange-text prefix"></i> <input id="player" type="text" name="player1_'+x+'" placeholder="enter player name here"></div>'); //add input box
+                    $(wrapper).append('<div class="input-field animated fadeIn"><i class="small mdi-action-account-circle orange-text prefix"></i> <input id="player" type="text" name="player1_' + x + '" placeholder="enter player name here"></div>'); //add input box
                 }
             });
             $(add_button_two).click(function (e) { //on add input button click
                 e.preventDefault();
                 if (y < max_fields) { //max input box allowed
                     y++; //text box increment
-                    $(wrappertwo).append('<div class="input-field animated fadeIn"><i class="small mdi-action-account-circle orange-text prefix"></i> <input id="player2" type="text" name="player2_'+y+'" placeholder="enter player name here"></div>'); //add input box
+                    $(wrappertwo).append('<div class="input-field animated fadeIn"><i class="small mdi-action-account-circle orange-text prefix"></i> <input id="player2" type="text" name="player2_' + y + '" placeholder="enter player name here"></div>'); //add input box
                 }
             });
             $(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
@@ -83,26 +83,26 @@
                             </div>
                         </div>
 
+                    </div>
                 </div>
-            </div>
                 <div class="row">
                     <div class="center">
-                                <br>
-                                 <button class="btn waves-effect waves-light green darken-1 white-text z-depth-4" type="submit"
-                                    name="action" value="Send">Submit
-                                <i class="mdi-content-send right"></i>
-                            </button>
-                            </div>
+                        <br>
+                        <button class="btn waves-effect waves-light green darken-1 white-text z-depth-4" type="submit"
+                                name="action" value="Send">Submit
+                            <i class="mdi-content-send right"></i>
+                        </button>
+                    </div>
 
                 </div>
-                </div>
+            </div>
         </form>
     </div>
 
     <footer class="page-footer orange lighten-2">
-            <div class="container red-text center">
+        <div class="container red-text center">
             <h6>*Player name needs to be entered in batting order only!</h6>
-            </div>
+        </div>
     </footer>
 
 {% endblock %}

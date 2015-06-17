@@ -1,60 +1,58 @@
 {% extends "template.html" %}
 {% block style %}
     <style>
-@-webkit-keyframes fadeInDown {
-  0% {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
+        @-webkit-keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                -webkit-transform: translate3d(0, -100%, 0);
+                transform: translate3d(0, -100%, 0);
+            }
 
-  100% {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
-}
+            100% {
+                opacity: 1;
+                -webkit-transform: none;
+                transform: none;
+            }
+        }
 
-@keyframes fadeInDown {
-  0% {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                -webkit-transform: translate3d(0, -100%, 0);
+                transform: translate3d(0, -100%, 0);
+            }
 
-  100% {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
-}
+            100% {
+                opacity: 1;
+                -webkit-transform: none;
+                transform: none;
+            }
+        }
 
-.fadeInDown {
-  -webkit-animation-name: fadeInDown;
-  animation-name: fadeInDown;
-}
+        .fadeInDown {
+            -webkit-animation-name: fadeInDown;
+            animation-name: fadeInDown;
+        }
 
-    #main
-    {
-        -webkit-animation-delay: 800ms;
-        -moz-animation-delay: 800ms;
-    }
+        #main {
+            -webkit-animation-delay: 800ms;
+            -moz-animation-delay: 800ms;
+        }
 
-</style>
+    </style>
 {% endblock %}
 {% block script %}
-<script>
+    <script>
         $(document).ready(function () {
 
             $('#banner').addClass('animated fadeInDown');
         });
-</script>
+    </script>
 {% endblock %}
 
 {% block content %}
 
     <div class="container animated fadeIn" id="main">
-        <form action="/teams" method="get">
             <div class="section">
 
                 <!--   Icon Section   -->
@@ -69,11 +67,14 @@
                     <div class="col s12 m6 z-depth-5" id="team1">
                         <div class="icon-block">
                             <div class="center">
+                                        <form action="/teams" method="get">
+
                                 <button class="btn-flat waves-effect waves-light orange darken-1 white-text"
                                         type="submit"
                                         name="action" value="Send">Start Match
                                     <i class="mdi-content-send right"></i>
                                 </button>
+                                            </form>
                             </div>
                         </div>
                     </div>
@@ -100,9 +101,11 @@
 
                             <ul class="collapsible" data-collapsible="accordion">
                                 <li>
-                                    <div class="collapsible-header green-text"><i class="mdi-action-help green-text"></i>What is Skorr??
+                                    <div class="collapsible-header green-text"><i
+                                            class="mdi-action-help green-text"></i>What is Skorr??
                                     </div>
-                                    <div class="collapsible-body grey-text"><p>Cricket happens to be an awesome game. Its a
+                                    <div class="collapsible-body grey-text"><p>Cricket happens to be an awesome game.
+                                        Its a
                                         religion for a bunch (Around 2 Billion) of people. Budding cricketers
                                         play on small roads and grounds in thousands of matches all over the globe. What
                                         Skorr aims is to ease scoring of such impromptu matches. All you need is a
@@ -112,18 +115,75 @@
                                     </p></div>
                                 </li>
                                 <li>
-                                    <div class="collapsible-header red-text"><i class="mdi-action-info"></i>What we are not:
+                                    <div class="collapsible-header red-text"><i class="mdi-action-info"></i>What we are
+                                        not:
                                     </div>
-                                    <div class="collapsible-body grey-text"><p>We don't plan to be a cricket stats database for
+                                    <div class="collapsible-body grey-text"><p>We don't plan to be a cricket stats
+                                        database for
                                         international/first class/state level matches. Our focus is strictly local.</p>
                                     </div>
                                 </li>
-                                 <li>
-                                    <div class="collapsible-header green-text"><i class="mdi-action-speaker-notes"></i>Limitations:
+                                <li>
+                                    <div class="collapsible-header orange-text"><i class="mdi-action-speaker-notes"></i>Limitations:
                                     </div>
-                                    <div class="collapsible-body grey-text"><p>This is version 0.1. Functionality is congruent to that. No bowler support. If you try to break the
-                                    software, it will break. We are giving you a knife. You can carve but also cut yourself.</p>
+                                    <div class="collapsible-body grey-text"><p>This is version 0.1. Functionality is
+                                        congruent to that. No bowler support. If you try to break the
+                                        software, it will break. We are giving you a knife. You can carve but also cut
+                                        yourself.</p>
                                     </div>
+                                </li>
+                                <li>
+                                    <div class="collapsible-header blue-text"><i class="mdi-communication-forum"></i>Contact
+                                        us:
+                                    </div>
+                                    <div class="collapsible-body">
+
+                                        <div class="container">
+                                            <form action="/contactus" method="post">
+                                                <div class="section">
+
+
+                                                    <!--   Icon Section   -->
+                                                    <div class="row">
+
+
+                                                        <div>
+                                                            <div class="icon-block">
+                                                                <div class="input-field">
+                                                                    <input id="name" type="text" class="validate"
+                                                                           name="name">
+                                                                    <label for="name">Name</label>
+
+                                                                </div>
+                                                                <div class="input-field">
+                                                                    <input id="email" type="email" class="validate"
+                                                                           name="email">
+                                                                    <label for="email">Email</label>
+                                                                </div>
+
+                                                                <div class="input-field">
+                                                                    <textarea id="message" class="materialize-textarea"
+                                                                              name="message"></textarea>
+                                                                    <label for="message">Message</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="row center">
+                                                        <button class="btn waves-effect waves-light orange darken-1"
+                                                                type="submit"
+                                                                name="action" value="Send">Submit
+                                                            <i class="mdi-content-send right"></i>
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
                                 </li>
 
                             </ul>
@@ -141,7 +201,6 @@
 
                 </div>
             </div>
-        </form>
     </div>
 
 {% endblock %}
