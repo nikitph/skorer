@@ -3,6 +3,7 @@
 {% block script %}
     <script>
         $(document).ready(function () {
+            Materialize.toast('*Player name needs to be entered in batting order only!',5000);
             var max_fields = 15; //maximum input boxes allowed
             var wrapper = $("#team1"); //Fields wrapper
             var wrappertwo = $("#team2");
