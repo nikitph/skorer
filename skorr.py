@@ -19,7 +19,7 @@ db = TinyDB('skorr.json')
 socketio = SocketIO(app)
 match = {1: '1'}
 replay = {1: ['1']}
-stack = []
+# stack = []
 
 
 @app.route('/teams')
@@ -187,8 +187,8 @@ def is_valid_delivery():
 
 @socketio.on('my event', namespace='/test')
 def test_message(message):
-    global stack
-    stack.append(message)
+    # global stack
+    # stack.append(message)
     session['receive_count'] = session.get('receive_count', 0) + 1
     response = {}
     response['endofinnings'] = False
@@ -308,10 +308,10 @@ def join(message):
     join_room(message['room'])
     emit('my response', {'data': ''})
 
-@socketio.on('undo', namespace='/test')
-def undo(mes):
-    global stack
-    emit('undo response', stack.pop())
+# @socketio.on('undo', namespace='/test')
+# def undo(mes):
+#     global stack
+#     emit('undo response', stack.pop())
 
 
 def init_player_one(name):
