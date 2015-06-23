@@ -143,10 +143,10 @@
                 });
 
             });
-                        socket.on('undo response', function (msg) {
+                        {#socket.on('undo response', function (msg) {
                                             Materialize.toast(msg.count + ': ' + msg.data, 1000);
 
-                        });
+                        });#}
 
 
 
@@ -161,7 +161,7 @@
                 $('#runs').find('tr').append('<td><h4 class="animated fadeInDown">' + msg.data + '</h4></td>');
                 $('#team4').html(msg.mtotal + '/' + msg.wickets + '<br>' + msg.overs + '.' + msg.deliveries + ' Overs' + a);
                 $('#team3').html(msg.playerone + ' : ' + msg.playeroneruns + ' <br>' + msg.playertwo + ' : ' + msg.playertworuns);
-                $("input:checkbox").prop("checked", false);
+{#                $("input:checkbox").prop("checked", false);#}
                 if (msg.endofover) {
                     Materialize.toast('End of over', 1000);
                     $('#runs').find('tr').html('<td><h4 class="animated fadeInDown>End Of Over</h4></td>').delay(1000);
@@ -218,7 +218,7 @@
             });
         });
 
-        function undoFunc()
+       {# function undoFunc()
         {
              namespace = '/test'; // change to an empty string to use the global namespace
 
@@ -237,7 +237,7 @@
                 strikerout: getstrikerout()
             });
             return false;
-        }
+        }#}
 
         function submitFunc(i) {
             namespace = '/test'; // change to an empty string to use the global namespace
