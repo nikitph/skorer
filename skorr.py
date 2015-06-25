@@ -118,6 +118,10 @@ def comm_get(mid):
     global replay
     return render_template('commentary.html', msg=json.dumps(replay), mtch=str(mid))
 
+@app.route('/docommentary/<mid>', methods=['GET'])
+def docomm_get(mid):
+    return render_template('docommentary.html', mtch=str(mid))
+
 
 @app.route('/scorecard/<mid>', methods=['GET'])
 def sc_get(mid):
@@ -305,6 +309,11 @@ def test_broadcast_message(message):
 
 @socketio.on('join', namespace='/test')
 def join(message):
+    join_room(message['room'])
+    emit('my response', {'data': ''})
+
+@socketio.on('audio', namespace='/audio')
+def aud(message):
     join_room(message['room'])
     emit('my response', {'data': ''})
 
