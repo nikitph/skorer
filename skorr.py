@@ -1,5 +1,6 @@
 from random import randint
 from flask import Flask, render_template, request, url_for, redirect, session
+import numpy
 from tinydb import TinyDB, where
 from flask.ext.socketio import SocketIO, emit, join_room, leave_room, \
     close_room, disconnect
@@ -118,6 +119,7 @@ def comm_get(mid):
     global replay
     return render_template('commentary.html', msg=json.dumps(replay), mtch=str(mid))
 
+
 @app.route('/docommentary/<mid>', methods=['GET'])
 def docomm_get(mid):
     return render_template('docommentary.html', mtch=str(mid))
@@ -133,20 +135,22 @@ def sc_get(mid):
         scorecard_dict.append(temp.return_runs())
     return render_template('scorecard.html', sc=json.dumps(scorecard_dict), mtch=str(mid))
 
+
 @app.route('/fullscorecard/<mid>', methods=['GET'])
 def fullsc_get(mid):
     scorecard_dict = []
     global match
     mtch = match[session['mid']]
-    scorecard_dict.append(['','','','','Team 1','','','',''])
+    scorecard_dict.append(['', '', '', '', 'Team 1', '', '', '', ''])
     for p in mtch.get_all_players(1):
         temp = mtch.get_player(p, 1)
         scorecard_dict.append(temp.return_runs())
-    scorecard_dict.append(['','','','','Team 2','','','',''])
+    scorecard_dict.append(['', '', '', '', 'Team 2', '', '', '', ''])
     for p in mtch.get_all_players(2):
         temp = mtch.get_player(p, 2)
         scorecard_dict.append(temp.return_runs())
     return render_template('fullscorecard.html', sc=json.dumps(scorecard_dict), mtch=str(mid))
+
 
 @app.route('/contactus', methods=['POST'])
 def contact_us_form_post():
@@ -162,6 +166,7 @@ def contact_us_form_post():
 def index():
     return render_template('index.html')
 
+
 @app.route('/confirm', methods=['POST'])
 def confirm_post():
     email = EmailAssistant()
@@ -169,16 +174,17 @@ def confirm_post():
     return render_template('confirm.html',
                            message='Thank you for your interest in Skorr. We will let you know as soon as we have an announcement')
 
+
 @app.route('/matchc/<mid>', methods=['GET'])
 def matchc_get(mid):
     scorecard_dict = []
     global match
     mtch = match[session['mid']]
-    scorecard_dict.append(['','','','','Team 1','','','',''])
+    scorecard_dict.append(['', '', '', '', 'Team 1', '', '', '', ''])
     for p in mtch.get_all_players(1):
         temp = mtch.get_player(p, session['playing'])
         scorecard_dict.append(temp.return_runs())
-    scorecard_dict.append(['','','','','Team 2','','','',''])
+    scorecard_dict.append(['', '', '', '', 'Team 2', '', '', '', ''])
     for p in mtch.get_all_players(2):
         temp = mtch.get_player(p, session['playing'])
         scorecard_dict.append(temp.return_runs())
@@ -210,13 +216,13 @@ def test_message(message):
         striker = mtch.get_player(session['striker'], session['playing'])
         if isNoBall:
             if message['nbe']:
-                update_striker(run-1)
+                update_striker(run - 1)
             else:
-                striker.update_runs(run-1)
-                update_striker(run-1)
+                striker.update_runs(run - 1)
+                update_striker(run - 1)
 
         elif isWideBall:
-            update_striker(run-1)
+            update_striker(run - 1)
 
         elif isLegBye:
             update_striker(run)
@@ -307,20 +313,21 @@ def test_broadcast_message(message):
          {'data': message['data'], 'count': session['receive_count']},
          broadcast=True)
 
+
 @socketio.on('join', namespace='/test')
 def join(message):
     join_room(message['room'])
     emit('my response', {'data': ''})
 
-@socketio.on('audio', namespace='/audio')
-def aud(message):
-    join_room(message['room'])
-    emit('my response', {'data': ''})
 
 # @socketio.on('undo', namespace='/test')
 # def undo(mes):
-#     global stack
-#     emit('undo response', stack.pop())
+# global stack
+# emit('undo response', stack.pop())
+
+@socketio.on('comment', namespace='/test')
+def send_comm(message):
+    emit('comment response', {'data': message}, room=session['mid'])
 
 
 def init_player_one(name):

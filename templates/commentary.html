@@ -28,7 +28,7 @@
 
     // event handler for server sent data
     // the data is displayed in the "Received" section of the page
-    socket.on('my response', function (msg) {
+    socket.on('comment response', function (msg) {
         var a = '';
         Materialize.toast(msg.count + ': ' + msg.data, 1000);
                 $('#commentary').prepend('<a class="collection-item">' + msg.overs + '.' + msg.deliveries + ': ' + msg.data +'</a>');
