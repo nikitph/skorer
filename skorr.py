@@ -1,6 +1,5 @@
 from random import randint
 from flask import Flask, render_template, request, url_for, redirect, session
-import numpy
 from tinydb import TinyDB, where
 from flask.ext.socketio import SocketIO, emit, join_room, leave_room, \
     close_room, disconnect
